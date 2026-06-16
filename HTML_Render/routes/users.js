@@ -3,9 +3,12 @@ const router = express.Router()
 
 
 router.get('/', (req, res) => {
-    console.log("Users page")
-    res.render('users')
-})
+    res.render('posts', {
+        title: "Users page",
+        message: "به پروژه اکسپرس و EJS خوش آمدید!",
+        features: ["سادگی کدها", "ساختار هدر و فوتر منظم", "بدون پیچیدگی"]
+    });
+});
 
 
 router.get('/new', (req, res) => {
