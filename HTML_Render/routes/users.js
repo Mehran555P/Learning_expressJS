@@ -3,7 +3,7 @@ const router = express.Router()
 
 
 router.get('/', (req, res) => {
-    res.render('posts', {
+    res.render('users', {
         title: "Users page",
         message: "به پروژه اکسپرس و EJS خوش آمدید!",
         features: ["سادگی کدها", "ساختار هدر و فوتر منظم", "بدون پیچیدگی"]
