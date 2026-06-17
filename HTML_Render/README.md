@@ -1,16 +1,22 @@
-# Simple Router project
-this project is a very simple routing program with **Express**.
+# A simple project for rendering some important pages in HTML
+this project is a program with views and uses as **Express** and **ejs**.
 
 ## Program structure:
 
-this program has tree importanrt part:
+this program has some importanrt parts:
 
+### routes:
 + Home page route
 + Users page rpute
 + Posts page route
 
+### views:
++ Home page view
++ Uses page view
++ Posts page veiw
+
 ## More about this program:
 
-this program doesn't have any view. Just some basic routing for understanding.
+this program has some views. Just some basic routing for understanding and HTML rendering.
 
 ## Thanks for your attention.
