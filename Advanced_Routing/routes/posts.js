@@ -22,6 +22,7 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
         res.send(`Get post with ID ${req.params.id}`)
+        console.log(req.post)
     })
 
 router.put('/:id', (req, res) => {
@@ -30,6 +31,12 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     res.send(`Delete post with ID ${req.params.id}`)
+})
+
+const posts = [{ name: "Express"}, { name: "EJS"}]
+router.param("id", (req, res, next, id) => {
+    req.post = posts[id]
+    next()
 })
 
 
