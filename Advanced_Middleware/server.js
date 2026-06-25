@@ -14,6 +14,7 @@ app.get('/users', auth, (req, res) => {
     res.send("Users page")
 })
 
+
 function logger(req, res, next) {
     console.log(req.originalUrl)
     next()
@@ -29,6 +30,5 @@ function auth(req, res, next) {
         res.send("No auth")
     }
 }
-
 
 app.listen(3000)
