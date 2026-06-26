@@ -1,16 +1,28 @@
-# Simple Router project
-this project is a very simple routing program with **Express**.
+# A program that works with data
+this program is a website it cans parsing data from user to our server. Developed with **Express**.
 
-## Program structure:
+## program structure:
 
-this program has tree importanrt part:
-
+### main routes:
 + Home page route
 + Users page rpute
 + Posts page route
 
-## More about this program:
+## sub routes:
++ New user page route
++ New post page route
++ get routes
++ post routes
++ put routes
++ delete routes
 
-this program doesn't have any view. Just some basic routing for understanding.
+### views:
++ Home page view
++ Uses page view
++ Create a new user view
++ Posts page veiw
+
+## More about this program:
+This program takes a name from client and log it in the console.
 
 ## Thanks for your attention.
