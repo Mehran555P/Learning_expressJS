@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "serverRunner": "node index.js",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "nodemon": "^3.1.14",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.22.5"
   }
 }
