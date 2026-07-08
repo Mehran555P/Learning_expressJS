@@ -1,5 +1,6 @@
 import express from 'express';
 import type { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
 
 // controllers
 import usersController from './users/usersController.js';
@@ -27,7 +28,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/users', usersController);
 app.use('/products', productsController);
 
-
+ 
 // Middleware
 
 // const myMiddleware = ((req: Request, res: Response, next: NextFunction) => {
@@ -38,9 +39,18 @@ app.use('/products', productsController);
 // app.use(myMiddleware);
 
 
-// start server
-app.listen(3000, ()=> {
-    console.log("Server is running in port 3000");
+// DB connection
+mongoose.connect("mongodb://localhost:27017/express_advanced", {
+    autoIndex: true,
+}).then(() => {
+    // start server
+    app.listen(3000, ()=> {
+        console.log("Server is running in port 3000");
+    });
+    console.log('MongoDB connected successfully!')
+}).catch((err) => {
+    console.log("error: ", err);
 });
+
 
 
