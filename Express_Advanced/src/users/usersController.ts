@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
 import { authMiddleware, ValidateMiddleWare } from "../middlewares/index.js";
-import { createNewUser, getAllUsers } from "./usersServices.js";
+import { createNewUser, deleteOneUser, updateOneUser, getAllUsers, getOneUser } from "./usersServices.js";
 import CreateUserDto from "./dtos/usersCreateDto.js";
 import type User from "./dtos/userDto.js";
 
@@ -9,9 +9,9 @@ const router = Router();
 
 // router.use(authMiddleware);
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', async(req: Request, res: Response) => {
     try {
-        res.send(getAllUsers());
+        res.send(await getAllUsers());
     }catch (err: any) {
         console.log("error: ", err.message)
         res.status(500).send({ message: err.message});
@@ -19,8 +19,15 @@ router.get('/', (req: Request, res: Response) => {
     
 });
 
-router.get('/:id', (req: Request, res: Response) => {
-    res.send("get user");
+router.get('/:id', async(req: Request, res: Response) => {
+
+    try {
+        const id = req.params.id as string;
+        res.send(await getOneUser(id));
+    }catch (err: any) {
+        console.log("error: ", err.message)
+        res.status(500).send({ message: err.message});
+    }
 });
 
 router.post('/', ValidateMiddleWare(CreateUserDto) , async(req: Request, res: Response) => {
@@ -37,12 +44,25 @@ router.post('/', ValidateMiddleWare(CreateUserDto) , async(req: Request, res: Re
 
 });
 
-router.put('/:id', (req: Request, res: Response) => {
-    res.send("update user");
+router.put('/:id', async(req: Request, res: Response) => {
+    try {
+        const params: User = req.body;
+        const id = req.params.id as string;
+        res.send(await updateOneUser(id, params));
+    }catch (err: any) {
+        console.log("error: ", err.message)
+        res.status(500).send({ message: err.message});
+    }
 });
 
-router.delete('/:id', (req: Request, res: Response) => {
-    res.send("delete user");
+router.delete('/:id', async(req: Request, res: Response) => {
+    try {
+        const id = req.params.id as string;
+        res.send(await deleteOneUser(id));
+    }catch (err: any) {
+        console.log("error: ", err.message)
+        res.status(500).send({ message: err.message});
+    }
 });
 
 
