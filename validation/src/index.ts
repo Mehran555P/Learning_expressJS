@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from 'express';
 import usersController from './users/usersController.js';
 const app = express();
 
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
     console.log("home page log.");
