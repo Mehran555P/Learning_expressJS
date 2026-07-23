@@ -9,6 +9,8 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
+    "experimentalDecorators": true, // 👈 MUST be true
+    "emitDecoratorMetadata": true,   // Required for class-validator
     "types": [],
     "moduleResolution": "NodeNext",
 
@@ -36,6 +38,7 @@
 
     // Recommended Options
     "strict": true,
+    "strictPropertyInitialization": false, // Turn off property init checks
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
