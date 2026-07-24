@@ -1,6 +1,6 @@
-class ClientError {
+class clientError {
     data: any;
     errors: any;
 }
 
-export default ClientError;
+export default clientError;
