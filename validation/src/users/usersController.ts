@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from 'express';
 import type User from './dtos/userDto.js';
 import CreateUserDto from './dtos/usersCreateDto.js';
 import ValidationMiddlWare from '../middlewares/validateMiddleware.js';
+import { createNewUser } from './usersServices.js';
 
 const router = express.Router();
 
@@ -20,12 +21,14 @@ router.get('/:id', (req: Request, res: Response) => {
 });
 
 // create a new user
-router.post('/', ValidationMiddlWare(CreateUserDto), async(req: Request, res: Response) => {
-
-    const body = req.body;
-    // res.send("user created.");
-    res.send(body);
-    console.log("user created.");
+router.post('/', ValidationMiddlWare(CreateUserDto), async(req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body: User = req.body;
+      const newUser = await createNewUser(body);
+      res.status(201).json(newUser);
+    } catch (err) {
+        next(err);
+    }
 });
 
 // update a user
