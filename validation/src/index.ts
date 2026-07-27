@@ -1,8 +1,15 @@
 import express from 'express';
 import type { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-import usersController from './users/usersController.js';
+
+// app
 const app = express();
+
+
+// routes/controllers
+import usersController from './users/usersController.js';
+import productsController from './products/productsController.js'
+
 
 app.use(express.json());
 
@@ -13,6 +20,8 @@ app.get('/', (req: Request, res: Response) => {
 
 
 app.use('/users', usersController);
+app.use('/products', productsController);
+
 
 // DB connection
 mongoose.connect("mongodb://localhost:27017/validation", {
