@@ -1,6 +1,9 @@
 import express from 'express';
 import type { Request, Response, NextFunction } from 'express';
-
+import ValidationMiddleware from '../middlewares/validateMiddleware.js';
+import CreateProductDto from './dtos/productsCreateDto.js';
+import type Product from './dtos/productDto.js';
+import { createNewProduct } from './productsServices.js';
 const router = express.Router();
 
 // get all products
@@ -16,8 +19,15 @@ router.get('/:id', (req: Request, res: Response) => {
 });
 
 // create a new product
-router.post('/', (req: Request, res: Response) => {
-    // ...
+router.post('/', ValidationMiddleware(CreateProductDto), async(req: Request, res: Response, next: NextFunction) => {
+
+    try {
+        const body: Product = req.body;
+        const newUser = await createNewProduct(body);
+        res.status(201).json(newUser);
+    } catch (err){
+        next(err);
+    }
 });
 
 // update a product
