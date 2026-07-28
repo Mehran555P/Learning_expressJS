@@ -1,4 +1,4 @@
-import { IsDefined, MaxLength, MinLength } from "class-validator";
+import { IsDefined, MaxLength, MinLength, Min } from "class-validator";
 
 class CreateProductDto {
     @IsDefined()
@@ -7,9 +7,11 @@ class CreateProductDto {
     name: string;
 
     @IsDefined()
+    @Min(0)
     cost: number;
 
     @IsDefined()
+    @Min(0)
     stock: number;
 }
 
