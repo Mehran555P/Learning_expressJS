@@ -31,7 +31,7 @@ mongoose.connect("mongodb://localhost:27017/validation", {
     app.listen(3000, ()=> {
         console.log("Server is running in port 3000");
     });
-    console.log('MongoDB connected successfully!')
+    console.log('MongoDB connected successfully!');
 }).catch((err) => {
     console.log("error: ", err);
 });
