@@ -3,21 +3,33 @@ import type { Request, Response, NextFunction } from 'express';
 import type User from './dtos/userDto.js';
 import CreateUserDto from './dtos/usersCreateDto.js';
 import ValidationMiddlWare from '../middlewares/validateMiddleware.js';
-import { createNewUser } from './usersServices.js';
+import { createNewUser, deleteOneUser, getAllUsers, getOneUser, updateOneUser } from './usersServices.js';
+import { stringify } from 'node:querystring';
+import { resolve } from 'node:dns';
 
 const router = express.Router();
 
 // get all users
-router.get('/', (req: Request, res: Response) => {
-    console.log("users page log.");
-    res.send("users page");
+router.get('/', async(req: Request, res: Response) => {
+    try {
+        res.send(await getAllUsers());
+    }catch(err: any) {
+        console.log("error: ", err.message);
+        res.status(500).send({ message: err.message});
+    }
 })
 
 // get one user
-router.get('/:id', (req: Request, res: Response) => {
-    const id = req.params.id;
-    console.log(`get user by id: ${id}`);
-    res.send(`get user by id: ${id}`)
+router.get('/:id', async(req: Request, res: Response) => {
+    try {
+        const id = req.params.id as string;
+        res.send(await getOneUser(id));
+    }catch(err: any) {
+        console.log("error: ", err.message);
+        res.status(500).send({ message: err.message});
+    }
+
+
 });
 
 // create a new user
@@ -32,19 +44,27 @@ router.post('/', ValidationMiddlWare(CreateUserDto), async(req: Request, res: Re
 });
 
 // update a user
-router.put('/:id', (req: Request, res: Response) => {
-    const body = req.body;
-    if (req.params.id) 
-        res.send(body);    
-        console.log("user updated.");
+router.put('/:id', async(req: Request, res: Response) => {
+    try {
+        const params: User = req.body;
+        const id = req.params.id as string;
+        res.send(await updateOneUser(id, params));
+    }catch(err: any) {
+        console.log("error: ", err.message)
+        res.status(500).send({ message: err.message});
+    }
+
 });
 
 // delete a user
-router.delete('/:id', (req: Request, res: Response) => {
-    const body = req.body;
-    if (req.params.id) 
-        res.send(body);    
-        console.log("user deleted.");
+router.delete('/:id', async(req: Request, res: Response) => {
+    try {
+        const id = req.params.id as string;
+        res.send(await deleteOneUser(id));
+    }catch(err: any) {
+        console.log("error: ", err.message);
+        res.status(500).send({ message: err.message});
+    }
 });
 
 export default router;

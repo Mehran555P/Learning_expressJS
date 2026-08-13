@@ -3,7 +3,7 @@ import { IsDefined, IsEmail, IsOptional, MinLength, MaxLength, Min, Max, IsStron
 class CreateUserDto {
 
     @IsDefined()
-    @MinLength(5)
+    @MinLength(2)
     @MaxLength(40)
     name: string;
 

@@ -26,7 +26,7 @@ app.use('/posts', postsController);
 
 
 // DB connection
-mongoose.connect("mongodb://localhost:27017/validation", {
+mongoose.connect("mongodb://localhost:27017/authentication", {
     autoIndex: true,
 }).then(() => {
     // start server
