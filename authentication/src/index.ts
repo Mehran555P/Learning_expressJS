@@ -7,6 +7,7 @@ const app = express();
 
 
 // routes/controllers
+import adminsController from './admins/adminsController.js';
 import usersController from './users/usersController.js';
 import productsController from './products/productsController.js'
 import postsController from './posts/postsController.js';
@@ -20,6 +21,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 
+app.use('/admins', adminsController)
 app.use('/users', usersController);
 app.use('/products', productsController);
 app.use('/posts', postsController);
