@@ -1,9 +1,8 @@
 import express from "express";
 import type { Request, Response, NextFunction } from "express";
 import ValidationMiddleware from "../middlewares/validateMiddleware.js";
-
 import CreateAdminDto from "./dtos/adminCreateDto.js";
-import { createAdmin, getAllAdmins } from "./adminsServices.js";
+import { createAdmin, deleteOneAdmin, getAllAdmins, getOneAdmin, updateOneAdmin } from "./adminsServices.js";
 import type Admin from "./dtos/adminDto.js";
 
 
@@ -31,21 +30,37 @@ router.post('/', ValidationMiddleware(CreateAdminDto), async (req: Request, res:
 });
 
 // get a specific admin
-router.get('/:id', (req: Request, res: Response) => {
-    console.log("get a specific admin");
-    res.send("get a specific admin");
+router.get('/:id', async (req: Request, res: Response) => {
+    try{
+        const id = req.params.id as string;
+        res.send(await getOneAdmin(id));
+    }catch(err: any) {
+        console.log("error: ", err.message)
+        res.status(500).send({ message: err.message});
+    }
 });
 
 // update an existing admin
-router.put('/:id', (req: Request, res: Response) => {
-    console.log("update an existing admin");
-    res.send("update an existing admin");
+router.put('/:id', async (req: Request, res: Response) => {
+    try {
+        const params: Admin = req.body;
+        const id = req.params.id as string;
+        res.send(await updateOneAdmin(id, params));
+    }catch(err: any) {
+        console.log("error: ", err.message)
+        res.status(500).send({ message: err.message});
+    }
 });
 
 // delete an existing admin
-router.delete('/:id', (req: Request, res: Response) => {
-    console.log("delete an existing admin");
-    res.send("delete an existing admin");
+router.delete('/:id', async(req: Request, res: Response) => {
+    try {
+        const id = req.params.id as string;
+        res.send(await deleteOneAdmin(id));
+    }catch(err: any) {
+        console.log("error: ", err.message)
+        res.status(500).send({ message: err.message});
+    }
 });
 
 export default router;

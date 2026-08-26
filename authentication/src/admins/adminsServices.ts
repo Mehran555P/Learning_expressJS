@@ -21,12 +21,32 @@ export const createAdmin = (admin: Admin) => {
             }).catch((err) => {
                 reject(err);
             });
-        });
+        })
 }
 
 export const getOneAdmin = (id: string) => {
     return new Promise((resolve, reject) => {
         adminModel.findById(id).then((admin) => {
+            resolve(admin);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
+}
+
+export const updateOneAdmin = (id: string, params: Admin) => {
+    return new Promise((resolve, reject) => {
+        adminModel.findByIdAndUpdate(id, params, { new: true }).then((admin) => {
+            resolve(admin);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
+}
+
+export const deleteOneAdmin = (id: string) => {
+    return new Promise((resolve, reject) => {
+        adminModel.findByIdAndDelete(id).then((admin) => {
             resolve(admin);
         }).catch((err) => {
             reject(err);
