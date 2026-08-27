@@ -1,12 +1,13 @@
 import express from "express";
 import type { Request, Response, NextFunction } from "express";
+import AdminAuthMiddleware from "../middlewares/adminAuthMiddleware.js";
 
 const router = express.Router();
 
 
 
 // get all posts
-router.get("/", (req: Request, res: Response) => {
+router.get("/", AdminAuthMiddleware, (req: Request, res: Response) => {
   console.log("posts page log.");
   res.send("posts page");
 });

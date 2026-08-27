@@ -36,7 +36,7 @@ export const getOneAdmin = (id: string) => {
 
 export const updateOneAdmin = (id: string, params: Admin) => {
     return new Promise((resolve, reject) => {
-        adminModel.findByIdAndUpdate(id, params, { new: true }).then((admin) => {
+        adminModel.findByIdAndUpdate(id, params).then((admin) => {
             resolve(admin);
         }).catch((err) => {
             reject(err);
