@@ -43,7 +43,7 @@ app.use('/auth', authController);
 
 
 // DB connection
-mongoose.connect("mongodb://localhost:27017/express_advanced", {
+mongoose.connect("mongodb://localhost:27017/advanced_auth", {
     autoIndex: true,
 }).then(() => {
     // start server
